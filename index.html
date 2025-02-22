@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cisco IOS-XR Telemetry Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Cisco IOS-XR Telemetry Configuration</h1>
+    <span>Just an experimental page to get to know telemetry a little better.</span>
+    <span>Contact Matt for more info.</span><br/><br/>
+    <form id="telemetryForm">
+        <!-- Basic Telemetry Section -->
+        <fieldset>
+            <legend>Basic Telemetry</legend>
+            <label><input type="checkbox" name="basicTelemetry" value="CPU"> CPU Usage</label><br>
+            <label><input type="checkbox" name="basicTelemetry" value="Memory"> Memory Usage</label><br>
+            <label><input type="checkbox" name="basicTelemetry" value="Disk"> Disk Usage</label><br>
+            <label for="basicFrequency">Frequency (seconds):</label>
+            <input type="number" id="basicFrequency" name="basicFrequency" value="10" min="1">
+        </fieldset>
+
+        <!-- Advanced Telemetry Section -->
+        <fieldset>
+            <legend>Advanced Telemetry</legend>
+            <!-- Optical Power Levels -->
+            <label><input type="checkbox" name="advancedTelemetry" value="OpticalPower"> Optical Power Levels</label><br>
+            <!-- MPLS-TE Counters -->
+            <label><input type="checkbox" name="advancedTelemetry" value="MPLS_TE"> MPLS-TE Counters</label><br>
+            <!-- MPLS-LDP Neighbors -->
+            <label><input type="checkbox" name="advancedTelemetry" value="MPLS_LDP"> MPLS-LDP Neighbors</label><br>
+            <!-- Routing Information -->
+            <label><input type="checkbox" name="advancedTelemetry" value="Routing"> Routing Information</label><br>
+            <label for="advancedFrequency">Frequency (seconds):</label>
+            <input type="number" id="advancedFrequency" name="advancedFrequency" value="10" min="1">
+        </fieldset>
+
+        <!-- Interface Telemetry Section -->
+        <fieldset>
+            <legend>Interface Telemetry</legend>
+            <div id="interfaceList">
+                <label>Interface Name: <input type="text" name="interfaces"></label>
+            </div>
+            <button type="button" id="addInterface">Add Another Interface</button><br>
+            <label for="interfaceFrequency">Frequency (seconds):</label>
+            <input type="number" id="interfaceFrequency" name="interfaceFrequency" value="1" min="1">
+        </fieldset>
+
+        <button type="button" id="generateConfig">Generate Configuration</button>
+    </form>
+
+    <pre id="configOutput"></pre>
+
+    <script src="script.js"></script>
+    <script src="telemetry-config.js"></script>
+</body>
+</html>
