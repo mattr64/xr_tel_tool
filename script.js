@@ -57,11 +57,13 @@ document.getElementById('generateConfig').addEventListener('click', function() {
     document.getElementById('configOutput').textContent = config;
 });
 
-// ✅ FIX: Enable Event-Driven Checkboxes Dynamically
+// DOM fix: Enable Event-Driven Checkboxes Dynamically
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.routing-checkbox').forEach(routingCheckbox => {
         routingCheckbox.addEventListener('change', function() {
-            const eventDrivenCheckbox = this.closest('label').nextElementSibling.querySelector('.event-driven-checkbox');
+            const protocol = this.value; // Get protocol name (e.g., "BGP", "OSPF")
+            const eventDrivenCheckbox = document.querySelector(`input[name="eventDriven_${protocol}"]`);
+
             if (eventDrivenCheckbox) {
                 eventDrivenCheckbox.disabled = !this.checked;
             }
