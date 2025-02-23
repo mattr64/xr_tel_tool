@@ -57,7 +57,7 @@ document.getElementById('generateConfig').addEventListener('click', function() {
     document.getElementById('configOutput').textContent = config;
 });
 
-// FIX: Enable Event-Driven Checkboxes Dynamically
+// ✅ FIX: Enable Event-Driven Checkboxes Dynamically
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.routing-checkbox').forEach(routingCheckbox => {
         routingCheckbox.addEventListener('change', function() {
