@@ -1,5 +1,6 @@
 // script.js
 // Loads telemetry paths and generates IOS-XR configuration
+
 document.getElementById('addInterface').addEventListener('click', function() {
     const interfaceList = document.getElementById('interfaceList');
     const newInterface = document.createElement('div');
@@ -54,4 +55,16 @@ document.getElementById('generateConfig').addEventListener('click', function() {
     }
 
     document.getElementById('configOutput').textContent = config;
+});
+
+// FIX: Enable Event-Driven Checkboxes Dynamically
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.routing-checkbox').forEach(routingCheckbox => {
+        routingCheckbox.addEventListener('change', function() {
+            const eventDrivenCheckbox = this.closest('label').nextElementSibling.querySelector('.event-driven-checkbox');
+            if (eventDrivenCheckbox) {
+                eventDrivenCheckbox.disabled = !this.checked;
+            }
+        });
+    });
 });
