@@ -12,22 +12,37 @@ document.getElementById('generateConfig').addEventListener('click', function() {
     const formData = new FormData(form);
     let config = 'telemetry model-driven\n';
 
-    function addTelemetry(groupName, paths, frequency) {
+    function addTelemetry(groupName, paths, frequency, eventDriven = false) {
         if (paths.length > 0) {
             config += `  sensor-group SG_${groupName}\n`;
             paths.forEach(path => config += `    sensor-path ${path}\n`);
-            config += `  subscription SUB_${groupName}\n    sensor-group-id SG_${groupName} sample-interval ${frequency}\n`;
+
+            if (eventDriven) {
+                config += `  subscription SUB_${groupName}\n    sensor-group-id SG_${groupName} event-driven\n`;
+            } else {
+                config += `  subscription SUB_${groupName}\n    sensor-group-id SG_${groupName} sample-interval ${frequency}\n`;
+            }
         }
     }
 
+    // Basic Telemetry
     let basicPaths = formData.getAll('basicTelemetry').map(sensor => TELEMETRY_PATHS.basic[sensor]);
     addTelemetry('BASIC', basicPaths, formData.get('basicFrequency') * 1000);
 
+    // Advanced Telemetry
     let advancedPaths = formData.getAll('advancedTelemetry').map(sensor => 
-        TELEMETRY_PATHS.advanced[sensor] || (TELEMETRY_PATHS.advanced.Routing[sensor] || null)
+        TELEMETRY_PATHS.advanced[sensor] || (TELEMETRY_PATHS.advanced.Routing[sensor]?.path || null)
     ).filter(Boolean);
     addTelemetry('ADVANCED', advancedPaths, formData.get('advancedFrequency') * 1000);
 
+    // Routing Telemetry
+    formData.getAll('routingTelemetry').forEach(protocol => {
+        let path = TELEMETRY_PATHS.advanced.Routing[protocol].path;
+        let isEventDriven = formData.get(`eventDriven_${protocol}`) !== null;
+        addTelemetry(`ROUTING_${protocol}`, [path], formData.get('advancedFrequency') * 1000, isEventDriven);
+    });
+
+    // Interface Telemetry
     let interfaces = formData.getAll('interfaces').filter(name => name.trim() !== '');
     if (interfaces.length > 0) {
         let interfacePaths = [];

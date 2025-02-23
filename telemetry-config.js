@@ -11,12 +11,12 @@ const TELEMETRY_PATHS = {
         MPLS_TE: "Cisco-IOS-XR-mpls-te-oper:mpls-te/tunnels/summary",
         MPLS_LDP: "Cisco-IOS-XR-mpls-ldp-oper:mpls-ldp/nodes/node/neighbors/neighbor",
         Routing: {
-            OSPF: "Cisco-IOS-XR-ipv4-ospf-oper:ospf/processes/process",
-            BGP: "Cisco-IOS-XR-ipv4-bgp-oper:bgp/instances/instance",
-            ISIS: "Cisco-IOS-XR-clns-isis-oper:isis/instances/instance",
-            EIGRP: "Cisco-IOS-XR-ipv4-eigrp-oper:eigrp/processes/process",
-            RIB: "Cisco-IOS-XR-ip-rib-ipv4-oper:rib/rib-table-ids",
-            LISP: "Cisco-IOS-XR-lisp-oper:lisp/instances/instance"
+            OSPF: { path: "Cisco-IOS-XR-ipv4-ospf-oper:ospf/processes/process", eventDriven: true },
+            BGP: { path: "Cisco-IOS-XR-ipv4-bgp-oper:bgp/instances/instance", eventDriven: true },
+            ISIS: { path: "Cisco-IOS-XR-clns-isis-oper:isis/instances/instance", eventDriven: true },
+            EIGRP: { path: "Cisco-IOS-XR-ipv4-eigrp-oper:eigrp/processes/process", eventDriven: true },
+            RIB: { path: "Cisco-IOS-XR-ip-rib-ipv4-oper:rib/rib-table-ids", eventDriven: true },
+            LISP: { path: "Cisco-IOS-XR-lisp-oper:lisp/instances/instance", eventDriven: true }
         }
     },
     interface: {
