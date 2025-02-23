@@ -23,25 +23,22 @@
         <!-- Advanced Telemetry Section -->
         <fieldset>
             <legend>Advanced Telemetry</legend>
-            <!-- Optical Power Levels -->
             <label><input type="checkbox" name="advancedTelemetry" value="OpticalPower"> Optical Power Levels</label><br>
-            <!-- MPLS-TE Counters -->
             <label><input type="checkbox" name="advancedTelemetry" value="MPLS_TE"> MPLS-TE Counters</label><br>
-            <!-- MPLS-LDP Neighbors -->
             <label><input type="checkbox" name="advancedTelemetry" value="MPLS_LDP"> MPLS-LDP Neighbors</label><br>
             <!-- Routing Information -->
             <fieldset>
                 <legend>Routing Telemetry</legend>
-                <label><input type="checkbox" name="routingTelemetry" value="OSPF"> OSPF</label>
-                <label><input type="checkbox" name="eventDriven_OSPF"> Event-Driven</label><br>
-                <label><input type="checkbox" name="routingTelemetry" value="BGP"> BGP</label>
-                <label><input type="checkbox" name="eventDriven_BGP"> Event-Driven</label><br>
-                <label><input type="checkbox" name="routingTelemetry" value="ISIS"> ISIS</label>
-                <label><input type="checkbox" name="eventDriven_ISIS"> Event-Driven</label><br>
-                <label><input type="checkbox" name="routingTelemetry" value="EIGRP"> EIGRP</label>
-                <label><input type="checkbox" name="eventDriven_EIGRP"> Event-Driven</label><br>
-                <label><input type="checkbox" name="routingTelemetry" value="RIB"> RIB</label>
-                <label><input type="checkbox" name="eventDriven_RIB"> Event-Driven</label><br>
+                <label><input type="checkbox" name="routingTelemetry" value="OSPF" class="routing-checkbox"> OSPF</label>
+                <label><input type="checkbox" name="eventDriven_OSPF" class="event-driven-checkbox" disabled> Event-Driven</label><br>
+                <label><input type="checkbox" name="routingTelemetry" value="BGP" class="routing-checkbox"> BGP</label>
+                <label><input type="checkbox" name="eventDriven_BGP" class="event-driven-checkbox" disabled> Event-Driven</label><br>
+                <label><input type="checkbox" name="routingTelemetry" value="ISIS" class="routing-checkbox"> ISIS</label>
+                <label><input type="checkbox" name="eventDriven_ISIS" class="event-driven-checkbox" disabled> Event-Driven</label><br>
+                <label><input type="checkbox" name="routingTelemetry" value="EIGRP" class="routing-checkbox"> EIGRP</label>
+                <label><input type="checkbox" name="eventDriven_EIGRP" class="event-driven-checkbox" disabled> Event-Driven</label><br>
+                <label><input type="checkbox" name="routingTelemetry" value="RIB" class="routing-checkbox"> RIB</label>
+                <label><input type="checkbox" name="eventDriven_RIB" class="event-driven-checkbox" disabled> Event-Driven</label><br>
             </fieldset>
             <label for="advancedFrequency">Frequency (seconds):</label>
             <input type="number" id="advancedFrequency" name="advancedFrequency" value="10" min="1">
@@ -68,5 +65,13 @@
 
     <script src="script.js"></script>
     <script src="telemetry-config.js"></script>
+    <script>
+        document.querySelectorAll('.routing-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const eventDrivenCheckbox = this.nextElementSibling;
+                eventDrivenCheckbox.disabled = !this.checked;
+            });
+        });
+    </script>
 </body>
 </html>
